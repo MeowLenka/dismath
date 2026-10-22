@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblab1_core.a CMakeFiles/lab1_core.dir/src/gray_code.cpp.o CMakeFiles/lab1_core.dir/src/multiset.cpp.o CMakeFiles/lab1_core.dir/src/operations.cpp.o CMakeFiles/lab1_core.dir/src/input.cpp.o
+/usr/bin/ranlib liblab1_core.a

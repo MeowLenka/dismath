@@ -1,0 +1,5 @@
+/Users/elenat/Documents/вуз/dismath/build/CMakeFiles/lab1_core.dir
+/Users/elenat/Documents/вуз/dismath/build/CMakeFiles/lab1.dir
+/Users/elenat/Documents/вуз/dismath/build/CMakeFiles/test.dir
+/Users/elenat/Documents/вуз/dismath/build/CMakeFiles/edit_cache.dir
+/Users/elenat/Documents/вуз/dismath/build/CMakeFiles/rebuild_cache.dir
