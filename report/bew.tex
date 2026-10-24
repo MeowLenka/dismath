@@ -1,7 +1,6 @@
 % !TEX program = pdflatex
 % Отчёт по лабораторной работе № 1 «Операции над мультимножествами и кодом Грея»
 \documentclass[14pt,a4paper]{extreport}
-
 \usepackage{indentfirst}
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -29,11 +28,27 @@
 \usepackage{newfloat}      % \DeclareFloatingEnvironment
 \usepackage{hyperref}
 \usepackage{textcomp}
+\usepackage{mathtools} % для символа \coloneqq (:=)
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\floatname{algorithm}{Алгоритм}
+\renewcommand{\listalgorithmname}{Список алгоритмов}
+\algrenewcommand\algorithmicrequire{\textbf{Вход:}}
+\algrenewcommand\algorithmicensure{\textbf{Выход:}}
+\algrenewcommand\algorithmicfor{\textbf{for}}
+\algrenewcommand\algorithmicdo{\textbf{do}}
+\algrenewcommand\algorithmicif{\textbf{if}}
+\algrenewcommand\algorithmicthen{\textbf{then}}
+\algrenewcommand\algorithmicend{\textbf{end}}
+\algrenewcommand\algorithmicreturn{\textbf{return}}
+\algrenewcommand\algorithmiccomment[1]{\hfill$\triangleright$ #1}
+\captionsetup[algorithm]{justification=raggedright,singlelinecheck=off,skip=4pt}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
 
-% ---- float-тип «listing» (тип + счётчик + имя) ----
+% --- float-тип «listing» (тип + счётчик + имя) ---
 \DeclareFloatingEnvironment[
   fileext=lol,
   listname={Список листингов},
@@ -41,7 +56,7 @@
   placement=H
 ]{listing}
 
-% ---- кириллица и спецсимволы в lstlisting ----
+% --- кириллица и спецсимволы в lstlisting ---
 \lstset{
   language=C++,
   basicstyle=\ttfamily\footnotesize,
@@ -102,7 +117,7 @@
     {B̄}{{$\bar{B}$}}1
 }
 
-% ---- Unicode-символы в основном тексте ----
+% --- Unicode-символы в основном тексте ---
 \DeclareUnicodeCharacter{2205}{\ensuremath{\varnothing}}
 \DeclareUnicodeCharacter{222A}{\ensuremath{\cup}}
 \DeclareUnicodeCharacter{2229}{\ensuremath{\cap}}
@@ -271,14 +286,14 @@ $m_A(x) \leqslant m_U (x)$ для всех $x \in X$.
 
 \subsection{Алгоритм генерации бинарного кода Грея}
 
-\emph{n-Мерный код Грея} -- это последовательность всех $2^n$ бинарных слов длины $n$ такая, что два соседних слова отличаются ровно в одном символе ~\cite{knuth}. 
+\emph{n-Мерный код Грея} -- это последовательность всех $2^n$ бинарных слов длины $n$ такая, что два соседних слова отличаются ровно в одном символе ~\cite{knuth1}. 
 Известно несколько алгоритмов построения кодов Грея. Традиционно используют нерекурсивный алгоритм, основанный на операции побитового исключиющего ИЛИ $\oplus$ исходного двоичного кода N-разрядного числа и его копии сдвинутой на один разряд вправо.
 
 $i$-й код Грея вычисляется непосредственно по формуле
 \begin{equation}
 g(i)=i\xor(i\shr 1),\qquad i=0,1,\ldots,2^n-1,
 \end{equation}
-где $\xor$ --- побитовое исключающее <<ИЛИ>>, а $\shr$ --- сдвиг вправо на один разряд. Полученное число записывается в виде строки из $n$ двоичных цифр с сохранением ведущих нулей. Далее, в таблице ~\ref{tab:gray}, приведен пример для $n=3$. 
+где $\xor$ -- побитовое исключающее <<ИЛИ>>, а $\shr$ -- сдвиг вправо на один разряд. Полученное число записывается в виде строки из $n$ двоичных цифр с сохранением ведущих нулей. Далее, в таблице ~\ref{tab:gray}, приведен пример для $n=3$. 
 
 \begin{table}[H]
 \caption{Код Грея для $n=3$}\label{tab:gray}
@@ -299,32 +314,24 @@ $i$ & Двоичный код $i$ & $i\shr 1$ & Код Грея $g(i)$ \\
 \end{tabular}
 \end{table}
 
-Каждый код формируется за $O(n)$ операций, поэтому построение всей последовательности имеет сложность $O(n\cdot 2^n)$. При $n=0$ последовательность считается пустой, а универсум --- пустым мультимножеством.
+Каждый код формируется за $O(n)$ операций, поэтому построение всей последовательности имеет сложность $O(n\cdot 2^n)$. При $n=0$ последовательность считается пустой, а универсум -- пустым мультимножеством.
 
 %====================== 2. ОСОБЕННОСТИ РЕАЛИЗАЦИИ ======================
 {\centering\section{Особенности реализации}}
 
 \subsection{Структура программы}
 
-Программа написана на языке C++ (стандарт C++20) с использованием стандартной библиотеки~\cite{cppref} и состоит из одного класса и функции mainб которые являются реализацией консольного приложения для работы с мультимножествами.
-
+Программа написана на языке C++ (стандарт C++20) с использованием стандартной библиотеки~\cite{cppref} и состоит из одного класса и функции main, которые являются реализацией консольного приложения для работы с мультимножествами.
 
 \subsection{Структура данных: класс MultiSet}
 
-Мультимножество хранится в классе \code{MultiSet} в виде ассоциативного контейнера \code{std::map<std::string, std::size\_t>}: ключом является код Грея (строка), значением --- его кратность. Контейнер хранит только элементы с положительной кратностью; метод \code{add} игнорирует добавление с нулевым количеством, поэтому инвариант <<в \code{data\_} нет нулевых кратностей>> выполняется всегда. Это даёт разреженное представление (пустое мультимножество не занимает памяти под элементы универсума) и упорядоченный перебор элементов, благодаря чему вывод детерминирован. Объявление класса приведено в листинге~\ref{lst:multiset}.
+Мультимножество хранится в классе \code{MultiSet} в виде ассоциативного контейнера \code{std::map<std::string, std::size\_t>}: ключом является код Грея (строка), значением -- его кратность. Контейнер хранит только элементы с положительной кратностью; метод \code{add} игнорирует добавление с нулевым количеством, поэтому инвариант <<в \code{data\_} нет нулевых кратностей>> выполняется всегда. Это даёт разреженное представление (пустое мультимножество не занимает памяти под элементы универсума) и упорядоченный перебор элементов, благодаря чему вывод детерминирован. Объявление класса приведено в листинге~\ref{lst:multiset}.
 
 \Needspace{10\baselineskip}
 \begin{listing}[H]
 \caption{Объявление класса MultiSet (multiset.hpp)}\label{lst:multiset}
 \begin{lstlisting}
-#pragma once
-
-#include <cstddef>
-#include <map>
-#include <string>
-
-class MultiSet
-{
+class MultiSet{
 public:
     using Count = std::size_t;
     using Data = std::map<std::string, Count>;
@@ -340,53 +347,72 @@ private:
 };
 \end{lstlisting}
 \end{listing}
-
-Методы класса и их сложность ($k$ --- число различных элементов в мультимножестве) перечислены в таблице~\ref{tab:msmethods}.
-
+\vspace{-0.7cm}
+Методы класса, их входные и выходные данные перечислены в таблице~\ref{tab:msmethods}.
 \begin{table}[H]
 \caption{Методы класса MultiSet}\label{tab:msmethods}
 \small\singlespacing
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.9cm}X>{\raggedright\arraybackslash}p{2.6cm}@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.3cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{3.4cm}X@{}}
 \toprule
-Метод & Описание & Сложность \\
+Метод & Вход & Выход & Описание \\
 \midrule
-\code{clear()} & удаляет все элементы & $O(k)$ \\
-\code{add(value, count)} & увеличивает кратность элемента на \code{count}; при \code{count = 0} ничего не делает (по умолчанию добавляется одно вхождение) & $O(\log k)$ \\
-\code{count(value)} & возвращает кратность элемента, либо 0, если элемента нет; использует \code{find}, поэтому не создаёт записей в контейнере & $O(\log k)$ \\
-\code{size()} & мощность мультимножества --- сумма всех кратностей & $O(k)$ \\
-\code{empty()} & признак пустоты (нет ни одного элемента с кратностью $>0$) & $O(1)$ \\
-\code{data()} & константная ссылка на внутренний контейнер для перебора элементов & $O(1)$ \\
+\code{clear()} & -- & -- & удаляет все элементы мультимножества \\ \hline
+\code{add(value, count)} & \code{value} (\code{const std::string\&}) -- элемент; \code{count} (\code{Count}) -- число добавляемых вхождений, по умолчанию 1 & -- & увеличивает кратность элемента \code{value} на \code{count}; при \code{count = 0} ничего не делает \\ \hline
+\code{count(value)} & \code{value} (\code{const std::string\&}) -- элемент & \code{Count} -- кратность элемента, 0, если элемента нет & ищет элемент методом \code{find}, поэтому не создаёт записей в контейнере \\ \hline
+\code{size()} & -- & \code{Count} -- мощность мультимножества & суммирует кратности всех элементов \\ \hline
+\code{empty()} & -- & \code{bool} -- \code{true}, если элементов нет & проверяет, что в контейнере нет ни одного элемента с положительной кратностью \\ \hline
+\code{data()} & -- & \code{const Data\&} -- ссылка на внутренний контейнер & даёт доступ к элементам для перебора без копирования \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \subsection{Генерация кода Грея}
 
-Модуль \code{gray\_code} содержит две функции. Функция \code{generateGrayCode(bits)} возвращает вектор из $2^{\text{bits}}$ строк: для каждого $i$ вычисляется число $i\xor(i\shr 1)$, которое переводится в строку функцией \code{decimalToBinary(value, width)}. Последняя строит строку ровно из \code{width} символов, извлекая биты от старшего к младшему выражением \code{(value >> shift) \& 1}; поэтому ведущие нули сохраняются. При \code{bits = 0} возвращается пустой вектор. Реализация приведена в листинге~\ref{lst:gray}.
+Модуль \code{gray\_code} содержит две функции: \code{generateGrayCode} формирует всю последовательность кодов Грея, а \code{decimalToBinary} переводит число в двоичную строку фиксированной длины.
+
+\textbf{generateGrayCode}
+
+\textbf{Вход:} \code{bits} (\code{std::size\_t}) -- разрядность кода.
+
+\textbf{Выход:} вектор строк (\code{std::vector<std::string>}) -- последовательность из $2^{\text{bits}}$ кодов Грея длиной \code{bits} символов; при \code{bits = 0} возвращается пустой вектор.
+
+\textbf{Описание:} для каждого номера $i$ от $0$ до $2^{\text{bits}}-1$ вычисляется значение $i\xor(i\shr 1)$, которое затем переводится в двоичную строку фиксированной длины функцией \code{decimalToBinary}.
+Реализация алгоритма на C++ приведена в листинге~\ref{lst:genGray}.
 
 \Needspace{10\baselineskip}
 \begin{listing}[H]
-\caption{Функции генерации кода Грея (gray\_code.cpp)}\label{lst:gray}
+\caption{Функция \code{generateGrayCode} (gray\_code.cpp)}\label{lst:genGray}
 \begin{lstlisting}
-std::vector<std::string> generateGrayCode(std::size_t bits)
-{
+std::vector<std::string> generateGrayCode(std::size_t bits){
     std::vector<std::string> result;
     if (bits == 0) return result;
     const std::size_t count = static_cast<std::size_t>(1) << bits;
     result.reserve(count);
-    for (std::size_t i = 0; i < count; ++i)
-    {
+    for (std::size_t i = 0; i < count; ++i){
         const unsigned long long gray = i ^ (i >> 1);
         result.push_back(decimalToBinary(gray, bits));
     }
     return result;
 }
+\end{lstlisting}
+\end{listing}
 
-std::string decimalToBinary(unsigned long long value, std::size_t width)
-{
+\textbf{decimalToBinary}
+
+\textbf{Вход:} \code{value} (\code{unsigned long long}) -- преобразуемое число;\\
+\noindent \code{width} (\code{std::size\_t}) -- длина результирующей строки.
+
+\textbf{Выход:} строка (\code{std::string}) из ровно \code{width} символов -- двоичная запись числа \code{value}; ведущие нули сохраняются.
+
+\textbf{Описание:} функция заполняет строку от старшего разряда к младшему: для позиции $i$ извлекается бит с номером $\text{width}-1-i$ выражением \code{(value >{}> shift) \& 1}. Разряды числа, не помещающиеся в \code{width} символов, отбрасываются (листинг~\ref{lst:decToBin}).
+
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\caption{Функция \code{decimalToBinary} (gray\_code.cpp)}\label{lst:decToBin}
+\begin{lstlisting}
+std::string decimalToBinary(unsigned long long value, std::size_t width){
     std::string result(width, '0');
-    for (std::size_t i = 0; i < width; ++i)
-    {
+    for (std::size_t i = 0; i < width; ++i){
         const std::size_t shift = width - 1 - i;
         result[i] = ((value >> shift) & 1ULL) ? '1' : '0';
     }
@@ -397,16 +423,20 @@ std::string decimalToBinary(unsigned long long value, std::size_t width)
 
 \subsection{Ввод и вывод}
 
-\paragraph{Защищённое чтение числа.} Функция \code{readInt(prompt, minValue, maxValue)} читает строку целиком функцией \code{std::getline}, помещает её в \code{std::stringstream} и принимает значение только в том случае, если одновременно выполняются три условия: число успешно извлечено, после него в строке нет посторонних символов и значение лежит в допустимом диапазоне. Такая схема исключает частичное чтение, свойственное \code{cin >> x} (например, строка \code{12abc} была бы прочитана как 12). Число читается в \code{long long}, поэтому переполнение \code{int} не приводит к ошибке (значение просто не попадает в диапазон). При некорректном вводе выводится сообщение с указанием диапазона и запрос повторяется (листинг~\ref{lst:readint}).
+\textbf{readInt}
+
+\textbf{Вход:} \code{prompt} (\code{const std::string\&}) -- приглашение к вводу; \code{minValue}, \code{maxValue} (\code{int}) -- границы допустимого диапазона.
+
+\textbf{Выход:} \code{int} -- введённое целое число из диапазона $[\text{minValue};\,\text{maxValue}]$.
+
+\textbf{Описание:} функция читает строку целиком функцией \code{std::getline} и разбирает её через \code{std::stringstream}. Значение принимается, только если число успешно извлечено, после него нет посторонних символов и оно лежит в допустимом диапазоне. При некорректном вводе выводится сообщение с указанием диапазона и запрос повторяется (листинг~\ref{lst:readint}).
 
 \Needspace{10\baselineskip}
 \begin{listing}[H]
-\caption{Функция защищённого ввода readInt (input.cpp)}\label{lst:readint}
+\caption{Функция \code{readInt} (input.cpp)}\label{lst:readint}
 \begin{lstlisting}
-int readInt(const std::string &prompt, int minValue, int maxValue)
-{
-    while (true)
-    {
+int readInt(const std::string &prompt, int minValue, int maxValue){
+    while (true){
         std::cout << prompt;
         std::string line;
         std::getline(std::cin, line);
@@ -415,71 +445,165 @@ int readInt(const std::string &prompt, int minValue, int maxValue)
         char extra;
         if ((ss >> value) && !(ss >> extra) && value >= minValue && value <= maxValue)
             return static_cast<int>(value);
-        std::cout << "Ошибка: введите целое число от " << minValue << " до " << maxValue << ".\n";
+        std::cout << "Ошибка: введите целое число от " << minValue 
+        << " до " << maxValue << ".\n";
     }
 }
 \end{lstlisting}
 \end{listing}
 
-\paragraph{Ручное заполнение.} Функция \code{readManualMultiset} показывает пользователю пронумерованный универсум, а затем для каждого из \code{power} вхождений запрашивает \emph{номер} элемента (а не его код), что исключает ошибки в записи кодов. Введённый номер проверяется \code{readInt} на принадлежность диапазону $[1;\,2^n]$; затем проверяется, что кратность элемента в формируемом мультимножестве ещё меньше его кратности в универсуме. Если лимит исчерпан, выводится сообщение, счётчик не увеличивается и ввод повторяется. Таким образом, условие $A\subseteq U$ выполняется по построению.
+\textbf{readManualMultiset}
 
-\paragraph{Автоматическое заполнение.} Функция \code{generateAutomaticMultiset} реализует случайную выборку без возвращения (<<алгоритм мешка>>):
-\begin{enumerate}
-\item формируется вектор \code{pool}, в который каждый элемент универсума помещается столько раз, какова его кратность, --- всего $\card{U}$ строк;
-\item вектор перемешивается алгоритмом \code{std::shuffle} с генератором \code{std::mt19937\_64}, инициализируемым значением \code{std::random\_device};
-\item первые \code{power} элементов добавляются в результат.
-\end{enumerate}
-Элемент не может быть извлечён больше раз, чем он находится в мешке, поэтому условие $A\subseteq U$ выполняется без дополнительных проверок, а мощность результата равна \code{power}. Время и память --- $O(\card{U})$ (листинг~\ref{lst:auto}).
+\textbf{Вход:} \code{name} (\code{const std::string\&}) -- имя мультимножества; \code{universe} (\code{const MultiSet\&}) -- универсум; \code{order} (\code{const std::vector<std::string>\&}) -- коды в порядке Грея, задающие нумерацию; \code{power} (\code{std::size\_t}) -- требуемая мощность.
+
+\textbf{Выход:} \code{MultiSet} -- мультимножество мощности \code{power}; пустое, если \code{power = 0} или универсум пуст.
+
+\textbf{Описание:} для каждого из \code{power} вхождений запрашивается \emph{номер} элемента (а не его код), что исключает ошибки в записи кодов. Номер проверяется функцией \code{readInt} на принадлежность диапазону $[1;\,2^n]$, затем проверяется, что кратность элемента в формируемом мультимножестве меньше его кратности в универсуме. Если лимит исчерпан, выводится сообщение, счётчик не увеличивается и ввод повторяется, поэтому условие $A\subseteq U$ выполняется по построению (листинг~\ref{lst:manual}).
 
 \Needspace{10\baselineskip}
 \begin{listing}[H]
-\caption{Автоматическое заполнение мультимножества (input.cpp)}\label{lst:auto}
+\caption{Функция \code{readManualMultiset} (input.cpp)}\label{lst:manual}
 \begin{lstlisting}
-MultiSet generateAutomaticMultiset(const MultiSet &universe,
-                                   std::size_t power)
-{
+MultiSet readManualMultiset(const std::string &name, 
+        const MultiSet &universe,const std::vector<std::string> &order, 
+        std::size_t power){
     MultiSet result;
-    if (power == 0 || universe.empty()) return result;
-    std::vector<std::string> pool;
-    pool.reserve(universe.size());
-    for (const auto &[value, count] : universe.data())
-    {
-        for (std::size_t i = 0; i < count; ++i)
-            pool.push_back(value);
+    if (power == 0 || universe.empty())
+        return result;
+    std::cout << "\nРучное заполнение мультимножества " << name << ".\n";
+    std::cout << "Введите номер элемента универсума для каждого вхождения.\n";
+    for (std::size_t i = 0; i < power; ++i){
+        const std::size_t index = readInt(
+            "Элемент " + std::to_string(i + 1) + ": ", 1,
+            order.size());
+        const std::string &chosen = order[index - 1];
+        if (result.count(chosen) >= universe.count(chosen)){
+            std::cout << "Ошибка: элемент " << chosen
+                      << " уже использован максимальное число раз ("
+                      << universe.count(chosen) << ").\n";
+            --i;
+            continue;
+        }
+        result.add(chosen);
     }
-    std::random_device rd;
-    std::mt19937_64 generator(rd());
-    const std::size_t actualPower = std::min(power, pool.size());
-    std::shuffle(pool.begin(), pool.end(), generator);
-    for (std::size_t i = 0; i < actualPower; ++i)
-        result.add(pool[i]);
     return result;
 }
 \end{lstlisting}
 \end{listing}
 
-\paragraph{Вывод.} Функция \code{printUniverse} печатает универсум в порядке кода Грея с нумерацией, кратностями и общей мощностью; \code{printMultiset} печатает мультимножество в формате \code{A = \{ код (кратность), \ldots{} \}  |A| = мощность}, а пустое --- как $\varnothing$.
+\textbf{generateAutomaticMultiset}
+
+\textbf{Вход:} \code{universe} (\code{const MultiSet\&}) -- универсум; \code{power} (\code{std::size\_t}) -- требуемая мощность.
+
+\textbf{Выход:} \code{MultiSet} -- случайное мультимножество мощности $\min(\text{power},\,\card{U})$.
+
+\textbf{Описание:} функция реализует <<алгоритм Дональда Кнута / Selection Sampling / Алгоритм S>> ~\cite{knuth2}.
+Универсум просматривается один раз, каждое вхождение элемента рассматривается как отдельный объект. Если до конца просмотра осталось $n$ вхождений и ещё нужно отобрать $m$ элементов, то очередное вхождение попадает в результат с вероятностью $m/n$: для этого генерируется случайное число из $[0;\,n-1]$, и вхождение берётся, если оно меньше $m$. После каждого шага $n$ уменьшается на единицу, а при выборе вхождения уменьшается и $m$. Такая схема даёт равновероятный выбор любого набора из $m$ вхождений. Время работы -- $O(\card{U})$, дополнительная память -- $O(1)$ (листинг~\ref{lst:auto}).
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\caption{Функция \code{generateAutomaticMultiset} (input.cpp)}\label{lst:auto}
+\begin{lstlisting}
+MultiSet generateAutomaticMultiset(const MultiSet &universe,
+                                   std::size_t power){
+    MultiSet result;
+    std::size_t n = universe.size();
+    std::size_t m = std::min(power, n);
+    std::mt19937_64 gen(std::random_device{}());
+    for (const auto &[value, count] : universe.data()){
+        for (std::size_t i = 0; i < count && m > 0; ++i){
+            if (std::uniform_int_distribution<std::size_t>(0, n - 1)(gen) < m){
+                result.add(value);
+                --m;
+            }
+            --n;
+        }
+    }
+    return result;
+}
+\end{lstlisting}
+\end{listing}
+
+\textbf{printUniverse}
+
+\textbf{Вход:} \code{universe} (\code{const MultiSet\&}) -- универсум; \\
+\noindent \code{order} (\code{const std::vector<std::string>\&}) -- коды в порядке Грея.
+
+\textbf{Выход:} нет (вывод в консоль).
+
+\textbf{Описание:} печатает число уникальных элементов и общую мощность универсума, затем нумерованный список кодов Грея с кратностями; пустой универсум выводится как $\varnothing$ (листинг~\ref{lst:printuni}).
+
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\caption{Функция \code{printUniverse} (input.cpp)}\label{lst:printuni}
+\begin{lstlisting}
+void printUniverse(const MultiSet &universe,
+                   const std::vector<std::string> &order){
+    std::cout << "\nУниверсум (" << order.size()
+              << " уникальных элементов, общая мощность "
+              << universe.size() << "):\n";
+    if (order.empty()){
+        std::cout << "∅\n";
+        return;
+    }
+    std::size_t i = 1;
+    for (const auto &value : order)
+        std::cout << i++ << ": " << value
+                  << " (кратность " << universe.count(value) << ")\n";
+}
+\end{lstlisting}
+\end{listing}
+
+\textbf{printMultiset}
+
+\textbf{Вход:} \code{name} (\code{const std::string\&}) -- имя мультимножества; \code{set} (\code{const MultiSet\&}) -- выводимое мультимножество.
+
+\textbf{Выход:} нет (вывод в консоль).
+
+\textbf{Описание:} печатает мультимножество в формате \code{A = \{ код (кратность), \ldots{} \}  |A| = мощность}; пустое мультимножество выводится как $\varnothing$ (листинг~\ref{lst:printmulty}).
+
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\caption{Функция \code{printMultiset} (input.cpp)}\label{lst:printmulty}
+\begin{lstlisting}
+void printMultiset(const std::string &name, const MultiSet &set){
+    std::cout << name << " = ";
+    if (set.empty())
+        std::cout << "∅";
+    else{
+        std::cout << "{ ";
+        bool first = true;
+        for (const auto &[value, count] : set.data()){
+            if (!first) std::cout << ", ";
+            std::cout << value << " (" << count << ")";
+            first = false;
+        }
+        std::cout << " }";
+    }
+    std::cout << "  |" << name << "| = " << set.size() << '\n';
+}
+\end{lstlisting}
+\end{listing}
 
 \subsection{Операции над мультимножествами}
 
-Модуль \code{operations} содержит по одной функции на каждую операцию задания; все функции возвращают новый объект \code{MultiSet}, не изменяя операнды. Соответствие функций формулам таблицы~\ref{tab:ops} показано в таблице~\ref{tab:opsfn}. Для перебора достаточно одного прохода по элементам первого операнда (или обоих --- при объединении), а кратность во втором операнде находится методом \code{count}, поэтому сложность каждой базовой операции составляет $O(k\log k)$.
+Модуль \code{operations} содержит по одной функции на каждую операцию задания. Все функции принимают операнды \code{a}, \code{b} и (где требуется) универсум \code{u} типа \code{const MultiSet\&}, возвращают новый объект \code{MultiSet} и не изменяют операнды. Характеристика функций показано в таблице~\ref{tab:opsfn}.
 
 \begin{table}[H]
 \caption{Функции модуля operations}\label{tab:opsfn}
 \small\singlespacing
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{2.6cm}X@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{4.7cm}>{\raggedright\arraybackslash}p{2.1cm}>{\raggedright\arraybackslash}p{2.6cm}X@{}}
 \toprule
-Функция & Операция & Принцип реализации \\
+Функция & Вход & Выход & Описание \\
 \midrule
-\code{setUnion(a, b)} & $A\cup B$ & копия $A$; для элементов $B$ кратность увеличивается до максимума \\
-\code{intersection(a, b)} & $A\cap B$ & минимум кратностей по элементам $A$ \\
-\code{complement(a, u)} & $\overline{A}$ & $\mult{U}{x}-\mult{A}{x}$ по всем элементам универсума \\
-\code{difference(a, b, u)} & $A\setminus B$ & \code{intersection(a, complement(b, u))} \\
-\code{symmetricDifference(a, b, u)} & $A\bigtri B$ & \code{difference(setUnion(a, b), intersection(a, b), u)} \\
-\code{arithmeticSum(a, b, u)} & $A+B$ & сумма кратностей, ограниченная $\mult{U}{x}$ \\
-\code{arithmeticDifference(a, b)} & $A-B$ & разность кратностей, только положительные результаты \\
-\code{arithmeticProduct(a, b, u)} & $A\cdot B$ & произведение кратностей (при $\mult{B}{x}>0$), ограниченное $\mult{U}{x}$ \\
-\code{arithmeticDivision(a, b)} & $A/B$ & целая часть частного при $\mult{B}{x}>0$; при $\mult{B}{x}=0$ элемент не включается \\
+\code{setUnion(a, b)} & $A$, $B$ & $A\cup B$ & копия $A$; для элементов $B$ кратность увеличивается до максимума \\
+\code{intersection(a, b)} & $A$, $B$ & $A\cap B$ & минимум кратностей по элементам $A$ \\
+\code{complement(a, u)} & $A$, $U$ & $\overline{A}$ & $\mult{U}{x}-\mult{A}{x}$ по всем элементам универсума \\
+\code{difference(a, b, u)} & $A$, $B$, $U$ & $A\setminus B$ & \code{intersection(a, complement(b, u))} \\
+\code{symmetricDifference(a, b, u)} & $A$, $B$, $U$ & $A\bigtri B$ & \code{difference(setUnion(a, b), intersection(a, b), u)} \\
+\code{arithmeticSum(a, b, u)} & $A$, $B$, $U$ & $A+B$ & сумма кратностей, ограниченная $\mult{U}{x}$ \\
+\code{arithmeticDifference(a, b)} & $A$, $B$ & $A-B$ & разность кратностей, сохраняются только положительные значения \\
+\code{arithmeticProduct(a, b, u)} & $A$, $B$, $U$ & $A\cdot B$ & произведение кратностей (при $\mult{B}{x}>0$), ограниченное $\mult{U}{x}$ \\
+\code{arithmeticDivision(a, b)} & $A$, $B$ & $A/B$ & целая часть частного при $\mult{B}{x}>0$; при $\mult{B}{x}=0$ элемент не включается \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -488,34 +612,90 @@ MultiSet generateAutomaticMultiset(const MultiSet &universe,
 
 \Needspace{10\baselineskip}
 \begin{listing}[H]
-\caption{Фрагмент модуля операций (operations.cpp)}\label{lst:ops}
+\caption{Реализация операций над мультимножествами (operations.cpp)}\label{lst:ops}
 \begin{lstlisting}
-MultiSet complement(const MultiSet &a, const MultiSet &universe)
-{
+MultiSet setUnion(const MultiSet &a, const MultiSet &b){
+    MultiSet result = a;
+    for (const auto &[value, countB] : b.data()){
+        const auto countA = result.count(value);
+        if (countB > countA)
+            result.add(value, countB - countA);
+    }
+    return result;
+}
+
+MultiSet intersection(const MultiSet &a, const MultiSet &b){
     MultiSet result;
-    for (const auto &[value, countU] : universe.data())
-    {
+    for (const auto &[value, countA] : a.data()){
+        const auto countB = b.count(value);
+        const auto count = std::min(countA, countB);
+        result.add(value, count);
+    }
+    return result;
+}
+
+MultiSet complement(const MultiSet &a, const MultiSet &universe){
+    MultiSet result;
+    for (const auto &[value, countU] : universe.data()){
         const auto countA = a.count(value);
         result.add(value, countU - countA);
     }
     return result;
 }
 
-MultiSet difference(const MultiSet &a, const MultiSet &b, const MultiSet &universe)
-{
+MultiSet difference(const MultiSet &a, const MultiSet &b, const MultiSet &universe){
     return intersection(a, complement(b, universe));
 }
+\end{lstlisting}
+\end{listing}
 
-MultiSet symmetricDifference(const MultiSet &a, const MultiSet &b, const MultiSet &universe)
-{
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\begin{lstlisting}
+MultiSet symmetricDifference(const MultiSet &a, const MultiSet &b, const MultiSet &universe){
     return difference(setUnion(a, b), intersection(a, b), universe);
 }
 
-MultiSet arithmeticDivision(const MultiSet &a, const MultiSet &b)
-{
+MultiSet arithmeticSum(const MultiSet &a, const MultiSet &b, const MultiSet &universe){
+    MultiSet result = a;
+    for (const auto &[value, countB] : b.data()){
+        const auto current = result.count(value);
+        const auto maxAllowed = universe.count(value);
+        const auto target = std::min(current + countB, maxAllowed);
+        result.add(value, target - current);
+    }
+    return result;
+}
+
+MultiSet arithmeticDifference(const MultiSet &a, const MultiSet &b){
     MultiSet result;
-    for (const auto &[value, countA] : a.data())
-    {
+    for (const auto &[value, countA] : a.data()){
+        const auto countB = b.count(value);
+        if (countA > countB) result.add(value, countA - countB);
+    }
+    return result;
+}
+\end{lstlisting}
+\end{listing}
+
+\Needspace{10\baselineskip}
+\begin{listing}[H]
+\begin{lstlisting}
+MultiSet arithmeticProduct(const MultiSet &a, const MultiSet &b, const MultiSet &universe){
+    MultiSet result;
+    for (const auto &[value, countA] : a.data()){
+        const auto countB = b.count(value);
+        if (countB > 0){
+            const auto count = std::min(countA * countB, universe.count(value));
+            result.add(value, count);
+        }
+    }
+    return result;
+}
+
+MultiSet arithmeticDivision(const MultiSet &a, const MultiSet &b){
+    MultiSet result;
+    for (const auto &[value, countA] : a.data()){
         const auto countB = b.count(value);
         if (countB > 0 && countA >= countB)
             result.add(value, countA / countB);
@@ -544,16 +724,29 @@ MultiSet arithmeticDivision(const MultiSet &a, const MultiSet &b)
 \end{tabularx}
 \end{table}
 
-Функция \code{createMultisets} выполняет пункт 1 в следующем порядке:
+\textbf{createMultisets}
+
+\textbf{Вход:} \code{bits} (\code{std::size\_t\&}) -- разрядность кода Грея; \code{universe} (\code{MultiSet\&}), \code{universeOrder} (\code{std::vector<std::string>\&}), \code{a}, \code{b} (\code{MultiSet\&}) -- заполняемые универсум, порядок его элементов и мультимножества.
+
+\textbf{Выход:} \code{bool} -- признак завершения; результат возвращается через ссылочные параметры.
+
+\textbf{Описание:} функция выполняет пункт 1 меню в следующем порядке:
 \begin{enumerate}
 \item генерирует коды Грея заданной разрядности и очищает предыдущие данные;
 \item при разрядности 0 сообщает, что универсум, $A$ и $B$ пусты, и завершает работу (граничный случай);
 \item назначает каждому коду случайную кратность из $[1;7]$ (равномерное распределение \code{std::uniform\_int\_distribution}, генератор \code{std::mt19937\_64});
 \item выводит универсум и время выполнения этапов (генерация кодов, заполнение, печать), измеренное с помощью \code{std::chrono::steady\_clock};
-\item запрашивает мощности $A$ и $B$ в диапазоне $[0;\card{U}]$ и способы их заполнения (1~--- вручную, 2~--- автоматически);
+\item запрашивает мощности $A$ и $B$ в диапазоне $[0;\card{U}]$ и способы их заполнения (1~-- вручную, 2~-- автоматически);
 \item заполняет мультимножества выбранным способом и выводит их.
 \end{enumerate}
-Функция \code{printOperations} печатает результаты операций: $A\cup B$, $A\cap B$, $A\setminus B$, $B\setminus A$, $A\bigtri B$, $\overline{A}$, $\overline{B}$, а также $A+B$, $A-B$, $B-A$, $A\cdot B$, $A/B$ и $B/A$. Вычитание, деление не коммутативны, поэтому выводятся оба варианта; произведение и сумма коммутативны и выводятся один раз.
+
+\textbf{printOperations}
+
+\textbf{Вход:} \code{a}, \code{b} (\code{const MultiSet\&}) -- операнды; \code{universe} (\code{const MultiSet\&}) -- универсум.
+
+\textbf{Выход:} нет (вывод в консоль).
+
+\textbf{Описание:} печатает результаты операций $A\cup B$, $A\cap B$, $A\setminus B$, $B\setminus A$, $A\bigtri B$, $\overline{A}$, $\overline{B}$, а также $A+B$, $A-B$, $B-A$, $A\cdot B$, $A/B$ и $B/A$. Вычитание и деление не коммутативны, поэтому выводятся оба варианта; сумма и произведение коммутативны и выводятся один раз.
 
 \subsection{Защита от некорректного ввода}
 
@@ -581,7 +774,7 @@ MultiSet arithmeticDivision(const MultiSet &a, const MultiSet &b)
 
 \subsection{Оценка сложности}
 
-Генерация универсума имеет сложность $O(n\cdot 2^n)$ по времени, заполнение контейнера --- $O(2^n\cdot n)$ (каждая вставка в \code{std::map} сравнивает строки длины $n$), вывод --- $O(2^n)$. Автоматическое заполнение требует $O(\card{U})$ времени и памяти, ручное --- $O(\text{\code{power}}\cdot\log 2^n)$. Операции над мультимножествами выполняются за $O(k\log k)$, где $k\le 2^n$ --- число различных элементов. Экспериментальные замеры приведены в п.~\ref{sec:timing}.
+Генерация универсума имеет сложность $O(n\cdot 2^n)$ по времени, заполнение контейнера -- $O(2^n\cdot n)$ (каждая вставка в \code{std::map} сравнивает строки длины $n$), вывод -- $O(2^n)$. Автоматическое заполнение требует $O(\card{U})$ времени и памяти, ручное -- $O(\text{\code{power}}\cdot\log 2^n)$. Операции над мультимножествами выполняются за $O(k\log k)$, где $k\le 2^n$ -- число различных элементов. Экспериментальные замеры приведены в п.~\ref{sec:timing}.
 
 %====================== 3. РЕЗУЛЬТАТЫ РАБОТЫ ======================
 \section{Результаты работы}
@@ -608,7 +801,7 @@ MultiSet arithmeticDivision(const MultiSet &a, const MultiSet &b)
 
 \subsection{Создание универсума и автоматическое заполнение}
 
-Выбирается пункт 1, вводится разрядность 3 (допустимый диапазон --- от 0 до 20). Программа формирует 8 кодов Грея в порядке кода Грея со случайными кратностями из $[1;7]$ и выводит универсум с его мощностью. Затем задаются мощности $A=5$ и $B=4$ и автоматический способ заполнения (рисунок~\ref{fig:auto}). Пункт 2 повторно выводит универсум и оба мультимножества.
+Выбирается пункт 1, вводится разрядность 3 (допустимый диапазон -- от 0 до 20). Программа формирует 8 кодов Грея в порядке кода Грея со случайными кратностями из $[1;7]$ и выводит универсум с его мощностью. Затем задаются мощности $A=5$ и $B=4$ и автоматический способ заполнения (рисунок~\ref{fig:auto}). Пункт 2 повторно выводит универсум и оба мультимножества.
 
 \begin{figure}[H]
 \begin{lstlisting}[numbers=none,frame=single]
@@ -711,7 +904,7 @@ B = ∅  |B| = 0
 \caption{Ручное заполнение мультимножества $A$ с ошибками ввода}\label{fig:manual}
 \end{figure}
 
-Мультимножество $A$ сформировано в точном соответствии с допустимыми введёнными данными: при превышении лимита (\code{000} --- 3 вхождения, \code{001} --- 4) программа сообщила об ошибке и запросила другой элемент, а мощность $\card{A}=8$ равна заданной.
+Мультимножество $A$ сформировано в точном соответствии с допустимыми введёнными данными: при превышении лимита (\code{000} -- 3 вхождения, \code{001} -- 4) программа сообщила об ошибке и запросила другой элемент, а мощность $\card{A}=8$ равна заданной.
 
 \subsection{Выполнение операций}
 
@@ -801,7 +994,7 @@ $B/A$ & $\lfloor 1/2\rfloor=0$ & $\lfloor 2/1\rfloor=2$ & 0 \\
 \end{tabular}
 \end{table}
 
-Значения совпадают с выводом программы: например, в рисунке~\ref{fig:ops} для элемента \code{010} присутствуют $A\cup B$ --- 2, $A\cap B$ --- 1, $A+B$ --- 3, $A-B$ --- 1, а для \code{101} --- $B/A$ равно 2 и $A/B$ равно 0 (элемент в результат не входит).
+Значения совпадают с выводом программы: например, в рисунке~\ref{fig:ops} для элемента \code{010} присутствуют $A\cup B$ -- 2, $A\cap B$ -- 1, $A+B$ -- 3, $A-B$ -- 1, а для \code{101} -- $B/A$ равно 2 и $A/B$ равно 0 (элемент в результат не входит).
 
 \subsection{Граничные случаи}
 
@@ -849,7 +1042,7 @@ B / A = ∅  |B / A| = 0
 
 \subsection{Некорректный пункт меню}
 
-В меню вводятся \code{abc}, \code{7}, \code{-1} и пустая строка. Каждый ввод отклоняется с сообщением о допустимом диапазоне, затем вводится \code{0} --- выход (рисунок~\ref{fig:badmenu}).
+В меню вводятся \code{abc}, \code{7}, \code{-1} и пустая строка. Каждый ввод отклоняется с сообщением о допустимом диапазоне, затем вводится \code{0} -- выход (рисунок~\ref{fig:badmenu}).
 
 \begin{figure}[H]
 \begin{lstlisting}[numbers=none,frame=single]
@@ -983,7 +1176,7 @@ $n$ & $2^n$ & $\card{U}$ & Генерация кодов, мс & Заполне�
 
 \textbf{Недостатки реализации:}
 \begin{itemize}
-\item автоматическое заполнение требует $O(\card{U})$ дополнительной памяти на «мешок» из строк (при $n=20$ --- порядка нескольких миллионов строк);
+\item автоматическое заполнение требует $O(\card{U})$ дополнительной памяти на «мешок» из строк (при $n=20$ -- порядка нескольких миллионов строк);
 \item при больших разрядностях печать всего универсума ($2^n$ строк) занимает большую часть времени и засоряет консоль;
 \item значения кратностей хранятся в \code{std::size\_t}, а строки кодов дублируются в ключах \code{std::map}, что увеличивает расход памяти по сравнению с вектором кратностей, индексированным номером кода;
 \item не предусмотрена обработка завершения потока ввода (Ctrl+D / EOF);
@@ -993,9 +1186,9 @@ $n$ & $2^n$ & $\card{U}$ & Генерация кодов, мс & Заполне�
 \textbf{Масштабирование.} На основе реализованных функций программу можно дополнить с минимальными изменениями кода:
 \begin{itemize}
 \item пунктом меню, сохраняющим результат выбранной операции в $A$ или $B$ (присваиванием возвращённого функцией объекта), что позволит строить цепочки вычислений;
-\item проверкой отношений между мультимножествами: включением $A\subseteq B$ ($\mult{A}{x}\le\mult{B}{x}$ для всех $x$) и равенством $A=B$ --- одной функцией, возвращающей \code{bool}, за один проход по элементам;
+\item проверкой отношений между мультимножествами: включением $A\subseteq B$ ($\mult{A}{x}\le\mult{B}{x}$ для всех $x$) и равенством $A=B$ -- одной функцией, возвращающей \code{bool}, за один проход по элементам;
 \item операциями над тремя и более мультимножествами, например $A\cap B\cap C$ или $(A\cup B)\setminus C$, так как функции операций возвращают новый объект и применяются последовательно;
-\item арифметической степенью $A^k$ с кратностями $\min(\mult{A}{x}^k,\ \mult{U}{x})$ и умножением на число $k\cdot A$ --- повторным применением произведения и суммы;
+\item арифметической степенью $A^k$ с кратностями $\min(\mult{A}{x}^k,\ \mult{U}{x})$ и умножением на число $k\cdot A$ -- повторным применением произведения и суммы;
 \item вводом и выводом мультимножеств в файл: достаточно направить \code{printMultiset} в \code{std::ostream} и реализовать чтение пар <<код; кратность>> с той же проверкой диапазонов, что и в \code{readInt};
 \item заменой строкового ключа на целочисленный индекс кода (или битовое представление), что уменьшит расход памяти и ускорит операции.
 \end{itemize}
@@ -1003,9 +1196,11 @@ $n$ & $2^n$ & $\card{U}$ & Генерация кодов, мс & Заполне�
 %====================== СПИСОК ЛИТЕРАТУРЫ ======================
 \structhead{СПИСОК ЛИТЕРАТУРЫ}{Список литературы}
 \begin{thebibliography}{9}
-\bibitem{novikov} Новиков Ф.\,А. Дискретная математика для программистов: учебник для вузов. --- 3-е изд. --- СПб.: Питер, 2009. --- 384~с.
-\bibitem{knuth} Knuth D.\,E. The Art of Computer Programming. Vol.~4A: Combinatorial Algorithms, Part~1. --- Upper Saddle River: Addison-Wesley, 2011. --- 883~p.
-\bibitem{cppref} cppreference.com: справочник по языку C++ и стандартной библиотеке [Электронный ресурс]. --- URL: \url{https://en.cppreference.com} (дата обращения: 24.10.2026).
+\bibitem{novikov} Новиков Ф.\,А. Дискретная математика для программистов: учебник для вузов. -- 3-е изд. -- СПб.: Питер, 2009. -- 384~с.
+\bibitem{knuth1} Knuth D.\,E. The Art of Computer Programming. Vol.~4A: Combinatorial Algorithms, Part~1. -- Upper Saddle River: Addison-Wesley, 2011. -- 883~p.
+\bibitem{knuth2} Knuth D.\,E. The Art of Computer Programming. Vol.~4A: Combinatorial Algorithms, том 2, издание 3. -- Upper Saddle River: Addison-Wesley, 2011. -- 883~p.
+\bibitem{haggarty} Haggarty R. Discrete Mathematics for Programmers. Vol.~4A: Combinatorial Algorithms, . -- Upper Saddle River: Addison-Wesley, 2011. -- 883~p.
+\bibitem{cppref} cppreference.com: справочник по языку C++ и стандартной библиотеке [Электронный ресурс]. -- URL: \url{https://en.cppreference.com} (дата обращения: 24.10.2026).
 \end{thebibliography}
 
 %====================== ПРИЛОЖЕНИЕ ======================

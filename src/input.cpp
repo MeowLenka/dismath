@@ -49,24 +49,25 @@ MultiSet readManualMultiset(const std::string &name, const MultiSet &universe,
     return result;
 }
 
-MultiSet generateAutomaticMultiset(const MultiSet &universe,
-                                   std::size_t power)
+MultiSet generateAutomaticMultiset(const MultiSet &universe, std::size_t power)
 {
     MultiSet result;
-    if (power == 0 || universe.empty()) return result;
-    std::vector<std::string> pool;
-    pool.reserve(universe.size());
+    std::size_t n = universe.size();
+    std::size_t m = std::min(power, n); // сколлько элементов еще нужно выбрать
+    std::mt19937_64 gen(std::random_device{}());
     for (const auto &[value, count] : universe.data())
     {
-        for (std::size_t i = 0; i < count; ++i)
-            pool.push_back(value);
+        for (std::size_t i = 0; i < count && m > 0; ++i)
+        {
+            // Выбираем текущий элемент с вероятностью m / n
+            if (std::uniform_int_distribution<std::size_t>(0, n - 1)(gen) < m)
+            {
+                result.add(value);
+                --m;
+            }
+            --n;
+        }
     }
-    std::random_device rd;
-    std::mt19937_64 generator(rd());
-    const std::size_t actualPower = std::min(power, pool.size());
-    std::shuffle(pool.begin(), pool.end(), generator);
-    for (std::size_t i = 0; i < actualPower; ++i)
-        result.add(pool[i]);
     return result;
 }
 
@@ -91,14 +92,16 @@ void printMultiset(const std::string &name, const MultiSet &set)
 {
     std::cout << name << " = ";
 
-    if (set.empty()) std::cout << "∅";
+    if (set.empty())
+        std::cout << "∅";
     else
     {
         std::cout << "{ ";
         bool first = true;
         for (const auto &[value, count] : set.data())
         {
-            if (!first) std::cout << ", ";
+            if (!first)
+                std::cout << ", ";
             std::cout << value << " (" << count << ")";
             first = false;
         }
