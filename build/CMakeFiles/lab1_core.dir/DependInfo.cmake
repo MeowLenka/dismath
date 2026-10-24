@@ -8,10 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/elenat/Documents/вуз/dismath/src/gray_code.cpp" "CMakeFiles/lab1_core.dir/src/gray_code.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/gray_code.cpp.o.d"
-  "/Users/elenat/Documents/вуз/dismath/src/input.cpp" "CMakeFiles/lab1_core.dir/src/input.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/input.cpp.o.d"
-  "/Users/elenat/Documents/вуз/dismath/src/multiset.cpp" "CMakeFiles/lab1_core.dir/src/multiset.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/multiset.cpp.o.d"
-  "/Users/elenat/Documents/вуз/dismath/src/operations.cpp" "CMakeFiles/lab1_core.dir/src/operations.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/operations.cpp.o.d"
+  "/Users/elenat/Documents/вуз/dismath/Lab1/src/gray_code.cpp" "CMakeFiles/lab1_core.dir/src/gray_code.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/gray_code.cpp.o.d"
+  "/Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp" "CMakeFiles/lab1_core.dir/src/input.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/input.cpp.o.d"
+  "/Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp" "CMakeFiles/lab1_core.dir/src/multiset.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/multiset.cpp.o.d"
+  "/Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp" "CMakeFiles/lab1_core.dir/src/operations.cpp.o" "gcc" "CMakeFiles/lab1_core.dir/src/operations.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

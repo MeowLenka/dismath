@@ -33,4 +33,4 @@ enable_testing()
 # Запуск:
 #cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 #cmake --build build  
-#./build/lab1      
+#./build/lab1

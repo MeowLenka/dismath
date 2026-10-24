@@ -1,7 +1,7 @@
 CMakeFiles/lab1_core.dir/src/input.cpp.o: \
-  /Users/elenat/Documents/вуз/dismath/src/input.cpp \
-  /Users/elenat/Documents/вуз/dismath/include/input.hpp \
-  /Users/elenat/Documents/вуз/dismath/include/multiset.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/input.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/multiset.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \

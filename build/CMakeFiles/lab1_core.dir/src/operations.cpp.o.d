@@ -1,7 +1,7 @@
 CMakeFiles/lab1_core.dir/src/operations.cpp.o: \
-  /Users/elenat/Documents/вуз/dismath/src/operations.cpp \
-  /Users/elenat/Documents/вуз/dismath/include/operations.hpp \
-  /Users/elenat/Documents/вуз/dismath/include/multiset.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/operations.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/multiset.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
@@ -899,5 +899,4 @@ CMakeFiles/lab1_core.dir/src/operations.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/not_fn.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/perfect_forward.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_back.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_front.h \
-  /Users/elenat/Documents/вуз/dismath/include/gray_code.hpp
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_front.h

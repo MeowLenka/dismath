@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/elenat/Documents/вуз/dismath/include
+CXX_INCLUDES = -I/Users/elenat/Documents/вуз/dismath/Lab1/include
 
 CXX_FLAGSarm64 = -O3 -DNDEBUG -std=c++20 -arch arm64 -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion
 

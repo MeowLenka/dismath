@@ -1,6 +1,6 @@
 CMakeFiles/lab1_core.dir/src/multiset.cpp.o: \
-  /Users/elenat/Documents/вуз/dismath/src/multiset.cpp \
-  /Users/elenat/Documents/вуз/dismath/include/multiset.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/multiset.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \

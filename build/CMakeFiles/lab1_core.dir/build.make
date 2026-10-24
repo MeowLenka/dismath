@@ -53,10 +53,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/elenat/Documents/вуз/dismath
+CMAKE_SOURCE_DIR = /Users/elenat/Documents/вуз/dismath/Lab1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/elenat/Documents/вуз/dismath/build
+CMAKE_BINARY_DIR = /Users/elenat/Documents/вуз/dismath/Lab1/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/lab1_core.dir/depend.make
@@ -73,60 +73,60 @@ CMakeFiles/lab1_core.dir/codegen:
 .PHONY : CMakeFiles/lab1_core.dir/codegen
 
 CMakeFiles/lab1_core.dir/src/gray_code.cpp.o: CMakeFiles/lab1_core.dir/flags.make
-CMakeFiles/lab1_core.dir/src/gray_code.cpp.o: /Users/elenat/Documents/вуз/dismath/src/gray_code.cpp
+CMakeFiles/lab1_core.dir/src/gray_code.cpp.o: /Users/elenat/Documents/вуз/dismath/Lab1/src/gray_code.cpp
 CMakeFiles/lab1_core.dir/src/gray_code.cpp.o: CMakeFiles/lab1_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lab1_core.dir/src/gray_code.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/gray_code.cpp.o -MF CMakeFiles/lab1_core.dir/src/gray_code.cpp.o.d -o CMakeFiles/lab1_core.dir/src/gray_code.cpp.o -c /Users/elenat/Documents/вуз/dismath/src/gray_code.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/lab1_core.dir/src/gray_code.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/gray_code.cpp.o -MF CMakeFiles/lab1_core.dir/src/gray_code.cpp.o.d -o CMakeFiles/lab1_core.dir/src/gray_code.cpp.o -c /Users/elenat/Documents/вуз/dismath/Lab1/src/gray_code.cpp
 
 CMakeFiles/lab1_core.dir/src/gray_code.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lab1_core.dir/src/gray_code.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/src/gray_code.cpp > CMakeFiles/lab1_core.dir/src/gray_code.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/Lab1/src/gray_code.cpp > CMakeFiles/lab1_core.dir/src/gray_code.cpp.i
 
 CMakeFiles/lab1_core.dir/src/gray_code.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lab1_core.dir/src/gray_code.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/src/gray_code.cpp -o CMakeFiles/lab1_core.dir/src/gray_code.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/Lab1/src/gray_code.cpp -o CMakeFiles/lab1_core.dir/src/gray_code.cpp.s
 
 CMakeFiles/lab1_core.dir/src/multiset.cpp.o: CMakeFiles/lab1_core.dir/flags.make
-CMakeFiles/lab1_core.dir/src/multiset.cpp.o: /Users/elenat/Documents/вуз/dismath/src/multiset.cpp
+CMakeFiles/lab1_core.dir/src/multiset.cpp.o: /Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp
 CMakeFiles/lab1_core.dir/src/multiset.cpp.o: CMakeFiles/lab1_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lab1_core.dir/src/multiset.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/multiset.cpp.o -MF CMakeFiles/lab1_core.dir/src/multiset.cpp.o.d -o CMakeFiles/lab1_core.dir/src/multiset.cpp.o -c /Users/elenat/Documents/вуз/dismath/src/multiset.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/lab1_core.dir/src/multiset.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/multiset.cpp.o -MF CMakeFiles/lab1_core.dir/src/multiset.cpp.o.d -o CMakeFiles/lab1_core.dir/src/multiset.cpp.o -c /Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp
 
 CMakeFiles/lab1_core.dir/src/multiset.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lab1_core.dir/src/multiset.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/src/multiset.cpp > CMakeFiles/lab1_core.dir/src/multiset.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp > CMakeFiles/lab1_core.dir/src/multiset.cpp.i
 
 CMakeFiles/lab1_core.dir/src/multiset.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lab1_core.dir/src/multiset.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/src/multiset.cpp -o CMakeFiles/lab1_core.dir/src/multiset.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/Lab1/src/multiset.cpp -o CMakeFiles/lab1_core.dir/src/multiset.cpp.s
 
 CMakeFiles/lab1_core.dir/src/operations.cpp.o: CMakeFiles/lab1_core.dir/flags.make
-CMakeFiles/lab1_core.dir/src/operations.cpp.o: /Users/elenat/Documents/вуз/dismath/src/operations.cpp
+CMakeFiles/lab1_core.dir/src/operations.cpp.o: /Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp
 CMakeFiles/lab1_core.dir/src/operations.cpp.o: CMakeFiles/lab1_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lab1_core.dir/src/operations.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/operations.cpp.o -MF CMakeFiles/lab1_core.dir/src/operations.cpp.o.d -o CMakeFiles/lab1_core.dir/src/operations.cpp.o -c /Users/elenat/Documents/вуз/dismath/src/operations.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lab1_core.dir/src/operations.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/operations.cpp.o -MF CMakeFiles/lab1_core.dir/src/operations.cpp.o.d -o CMakeFiles/lab1_core.dir/src/operations.cpp.o -c /Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp
 
 CMakeFiles/lab1_core.dir/src/operations.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lab1_core.dir/src/operations.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/src/operations.cpp > CMakeFiles/lab1_core.dir/src/operations.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp > CMakeFiles/lab1_core.dir/src/operations.cpp.i
 
 CMakeFiles/lab1_core.dir/src/operations.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lab1_core.dir/src/operations.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/src/operations.cpp -o CMakeFiles/lab1_core.dir/src/operations.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/Lab1/src/operations.cpp -o CMakeFiles/lab1_core.dir/src/operations.cpp.s
 
 CMakeFiles/lab1_core.dir/src/input.cpp.o: CMakeFiles/lab1_core.dir/flags.make
-CMakeFiles/lab1_core.dir/src/input.cpp.o: /Users/elenat/Documents/вуз/dismath/src/input.cpp
+CMakeFiles/lab1_core.dir/src/input.cpp.o: /Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp
 CMakeFiles/lab1_core.dir/src/input.cpp.o: CMakeFiles/lab1_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lab1_core.dir/src/input.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/input.cpp.o -MF CMakeFiles/lab1_core.dir/src/input.cpp.o.d -o CMakeFiles/lab1_core.dir/src/input.cpp.o -c /Users/elenat/Documents/вуз/dismath/src/input.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lab1_core.dir/src/input.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lab1_core.dir/src/input.cpp.o -MF CMakeFiles/lab1_core.dir/src/input.cpp.o.d -o CMakeFiles/lab1_core.dir/src/input.cpp.o -c /Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp
 
 CMakeFiles/lab1_core.dir/src/input.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lab1_core.dir/src/input.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/src/input.cpp > CMakeFiles/lab1_core.dir/src/input.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp > CMakeFiles/lab1_core.dir/src/input.cpp.i
 
 CMakeFiles/lab1_core.dir/src/input.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lab1_core.dir/src/input.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/src/input.cpp -o CMakeFiles/lab1_core.dir/src/input.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/elenat/Documents/вуз/dismath/Lab1/src/input.cpp -o CMakeFiles/lab1_core.dir/src/input.cpp.s
 
 # Object files for target lab1_core
 lab1_core_OBJECTS = \
@@ -144,7 +144,7 @@ liblab1_core.a: CMakeFiles/lab1_core.dir/src/operations.cpp.o
 liblab1_core.a: CMakeFiles/lab1_core.dir/src/input.cpp.o
 liblab1_core.a: CMakeFiles/lab1_core.dir/build.make
 liblab1_core.a: CMakeFiles/lab1_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/elenat/Documents/вуз/dismath/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library liblab1_core.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library liblab1_core.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/lab1_core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lab1_core.dir/link.txt --verbose=$(VERBOSE)
 
@@ -157,6 +157,6 @@ CMakeFiles/lab1_core.dir/clean:
 .PHONY : CMakeFiles/lab1_core.dir/clean
 
 CMakeFiles/lab1_core.dir/depend:
-	cd /Users/elenat/Documents/вуз/dismath/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/elenat/Documents/вуз/dismath /Users/elenat/Documents/вуз/dismath /Users/elenat/Documents/вуз/dismath/build /Users/elenat/Documents/вуз/dismath/build /Users/elenat/Documents/вуз/dismath/build/CMakeFiles/lab1_core.dir/DependInfo.cmake "--color=$(COLOR)" lab1_core
+	cd /Users/elenat/Documents/вуз/dismath/Lab1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/elenat/Documents/вуз/dismath/Lab1 /Users/elenat/Documents/вуз/dismath/Lab1 /Users/elenat/Documents/вуз/dismath/Lab1/build /Users/elenat/Documents/вуз/dismath/Lab1/build /Users/elenat/Documents/вуз/dismath/Lab1/build/CMakeFiles/lab1_core.dir/DependInfo.cmake "--color=$(COLOR)" lab1_core
 .PHONY : CMakeFiles/lab1_core.dir/depend
 

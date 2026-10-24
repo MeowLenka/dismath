@@ -8,9 +8,7 @@ void MultiSet::clear()
 void MultiSet::add(const std::string &value, Count count)
 {
     if (count == 0)
-    {
         return;
-    }
     data_[value] += count;
 }
 
@@ -24,9 +22,7 @@ MultiSet::Count MultiSet::size() const
 {
     Count result = 0;
     for (const auto &[_, count] : data_)
-    {
         result += count;
-    }
     return result;
 }
 

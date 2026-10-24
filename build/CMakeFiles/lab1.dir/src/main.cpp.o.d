@@ -1,6 +1,6 @@
 CMakeFiles/lab1.dir/src/main.cpp.o: \
-  /Users/elenat/Documents/вуз/dismath/src/main.cpp \
-  /Users/elenat/Documents/вуз/dismath/include/gray_code.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/src/main.cpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/gray_code.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
@@ -870,8 +870,8 @@ CMakeFiles/lab1.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale_dir/locale_base_api/bsd_locale_defaults.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdarg \
-  /Users/elenat/Documents/вуз/dismath/include/input.hpp \
-  /Users/elenat/Documents/вуз/dismath/include/multiset.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/input.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/multiset.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/map \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/is_transparent.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/erase_if_container.h \
@@ -901,7 +901,7 @@ CMakeFiles/lab1.dir/src/main.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/perfect_forward.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_back.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/bind_front.h \
-  /Users/elenat/Documents/вуз/dismath/include/operations.hpp \
+  /Users/elenat/Documents/вуз/dismath/Lab1/include/operations.hpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/random \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/bernoulli_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/uniform_real_distribution.h \
